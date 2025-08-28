@@ -1,6 +1,6 @@
 interface InfoItemProps {
   label: string;
-  value: string | null;
+  value?: string | null;
   className?: string;
 }
 
@@ -11,7 +11,7 @@ export function InfoItem({ label, value, className = '' }: InfoItemProps) {
         {label}
       </div>
       <div className={`text-gray-900 font-semibold ${className}`}>
-        {value || 'Unknown'}
+        {value ?? 'Unknown'}
       </div>
     </div>
   );

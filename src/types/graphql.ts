@@ -7,7 +7,7 @@ export interface Character {
   name: string | null;
   birthYear?: string | null;
   eyeColor: string | null;
-  gender: string | null;
+  gender: Gender;
   hairColor: string | null;
   height: string | null;
   mass: string | null;
@@ -55,3 +55,5 @@ export interface Homeworld {
   terrains: string | null;
   population: string | null;
 }
+
+export type Gender = 'male' | 'female' | 'n/a' | 'unknown' | null;
