@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
 import { CharacterCard } from '@/components';
 import { SearchInput } from '@/components/SearchInput';
+import { SortSelect } from '@/components/ui/SortSelect';
+import { useCharacterSearch, useCharacterSort } from '@/hooks';
 import { Character } from '@/types/graphql';
 
 interface CharacterListProps {
@@ -10,21 +11,10 @@ interface CharacterListProps {
 }
 
 export function CharacterList({ characters }: CharacterListProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const filteredCharacters = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return characters;
-    }
-
-    return characters.filter((character) =>
-      character.name?.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [characters, searchQuery]);
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
+  const { filteredCharacters, searchQuery, handleSearch } =
+    useCharacterSearch(characters);
+  const { sortedCharacters, sortOption, handleSort } =
+    useCharacterSort(filteredCharacters);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -37,18 +27,28 @@ export function CharacterList({ characters }: CharacterListProps) {
             Discover the legendary characters from a galaxy far, far away
           </p>
 
-          <div className="max-w-md mx-auto">
+          <div className="max-w-2xl mx-auto space-y-4">
             <SearchInput
               onSearch={handleSearch}
               placeholder="Search by character name..."
               debounceMs={300}
             />
+
+            {filteredCharacters.length > 0 && (
+              <div className="flex justify-center">
+                <SortSelect
+                  value={sortOption}
+                  onChange={handleSort}
+                  className="w-48"
+                />
+              </div>
+            )}
           </div>
         </div>
 
-        {filteredCharacters.length > 0 ? (
+        {sortedCharacters.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {filteredCharacters.map((character) => (
+            {sortedCharacters.map((character) => (
               <CharacterCard key={character.id} character={character} />
             ))}
           </div>
@@ -62,7 +62,7 @@ export function CharacterList({ characters }: CharacterListProps) {
           </div>
         )}
 
-        {filteredCharacters.length > 0 && (
+        {sortedCharacters.length > 0 && (
           <div className="text-center mt-12 sm:mt-16">
             <p className="text-gray-500 text-sm">
               Click on any character card to view detailed information

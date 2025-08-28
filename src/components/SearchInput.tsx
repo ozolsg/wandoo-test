@@ -55,6 +55,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         </div>
         <Input
           ref={ref}
+          name="search"
           type="text"
           value={query}
           onChange={handleInputChange}
