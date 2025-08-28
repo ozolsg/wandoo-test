@@ -1,8 +1,7 @@
 import { Character } from '@/types/graphql';
 import Link from 'next/link';
 import { CharacterHeader } from './CharacterHeader';
-import { CharacterStats } from './CharacterStats';
-import { CharacterTags } from './CharacterTags';
+import { CharacterDescription } from './CharacterDescription';
 import { ViewDetailsButton } from './ViewDetailsButton';
 
 interface CharacterCardProps {
@@ -16,13 +15,7 @@ export default function CharacterCard({ character }: CharacterCardProps) {
         <CharacterHeader name={character.name} />
 
         <div className="p-4 flex-1 flex flex-col space-y-4 md:p-6">
-          <CharacterStats height={character.height} mass={character.mass} />
-
-          <CharacterTags
-            hairColor={character.hairColor}
-            eyeColor={character.eyeColor}
-            skinColor={character.skinColor}
-          />
+          <CharacterDescription character={character} />
 
           <div className="flex-1" />
 
