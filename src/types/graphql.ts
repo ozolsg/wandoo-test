@@ -25,8 +25,6 @@ export interface Character {
     totalCount: number;
     starships: Starship[];
   } | null;
-  created: string | null;
-  edited: string | null;
 }
 
 export interface Film {
@@ -43,7 +41,7 @@ export interface Vehicle {
   model: string | null;
 }
 
-export interface Starship {
+interface Starship {
   id: string;
   name: string | null;
   model: string | null;

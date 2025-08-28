@@ -7,8 +7,6 @@ export const GET_CHARACTERS = gql`
         id
         name
         birthYear
-        created
-        edited
         eyeColor
         gender
         hairColor
@@ -67,8 +65,6 @@ export const GET_CHARACTER = gql`
           model
         }
       }
-      created
-      edited
     }
   }
 `;

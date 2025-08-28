@@ -6,7 +6,7 @@ import {
 } from '@apollo/client-integration-nextjs';
 import { SWAPI_URL } from '../utils/constants';
 
-export const { getClient, query, PreloadQuery } = registerApolloClient(() => {
+export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
     cache: new InMemoryCache({
       typePolicies: {
