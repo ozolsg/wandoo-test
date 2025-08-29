@@ -29,7 +29,6 @@ A Next.js application that displays Star Wars characters with search and sorting
 src/
 ├── app/                    # Next.js App Router
 │   ├── character/        # Character route
-│   │   └── client/       # Client components (use 'use client')
 │   ├── error.tsx         # Global error boundary
 │   ├── layout.tsx        # Root layout
 │   └── page.tsx          # Main page (SSR)
