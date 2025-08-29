@@ -12,19 +12,14 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
   const { id } = await params;
   const decodedId = decodeURIComponent(id);
 
-  try {
-    const { data } = await getClient().query<Person>({
-      query: GET_CHARACTER,
-      variables: { id: decodedId },
-    });
+  const { data } = await getClient().query<Person>({
+    query: GET_CHARACTER,
+    variables: { id: decodedId },
+  });
 
-    if (!data) {
-      notFound();
-    }
-
-    return <Character character={data.person} />;
-  } catch (error) {
-    console.error('Error fetching character:', error);
+  if (!data) {
     notFound();
   }
+
+  return <Character character={data.person} />;
 }

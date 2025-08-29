@@ -1,0 +1,1 @@
+export { sanitizeSearchQuery } from './sanitize';
